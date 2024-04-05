@@ -30,4 +30,7 @@ if there is one what is it
 9. Navigate to the repo on github.
 10. You will now be prompted to create a pull-request, do this.
 11. For the description of the PR feel free to just link the issue you were working on and if possible explain how you have verified that your code changes work (i.e. a screenshot, passing unit tests, etc).
-12. Once you're ready create the PR and wait for at least 1 person to take a look at it before merging (we don't have to stick to this but it's good practice and it'll help us from making dumb mistakes). 
+12. Once you're ready create the PR and wait for at least 1 person to take a look at it before merging (we don't have to stick to this but it's good practice and it'll help us from making dumb mistakes).
+
+## Notes
+- Having a set workflow is useful when working on a project with a team and helps us from making small mistakes that end up being hard to fix. Ofcourse these are not set rules and are obviously up for discussion just wanted to put a general template that we could follow for now.
