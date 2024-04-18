@@ -1,0 +1,31 @@
+{
+  "name": "server",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "ts-node src/index.ts",
+    "dev": "nodemon",
+    "schema-generate": "drizzle-kit generate:mysql --out migrations-folder --schema src/db/schema.ts",
+    "schema-push": "drizzle-kit push:mysql"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@types/cors": "^2.8.17",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "drizzle-orm": "^0.30.7",
+    "express": "^4.19.2",
+    "mysql2": "^3.9.4",
+    "nodemon": "^3.1.0"
+  },
+  "devDependencies": {
+    "@types/express": "^4.17.21",
+    "drizzle-kit": "^0.20.14",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.4.4"
+  }
+}
