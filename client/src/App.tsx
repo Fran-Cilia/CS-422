@@ -35,7 +35,7 @@ function App() {
 
   return (
     <div className="flex flex-col items-center">
-      <h1>Users: ${JSON.stringify(data)}</h1>
+      <h1>Users: {JSON.stringify(data)}</h1>
       <div>
         <h1>Create New User:</h1>
         <form
