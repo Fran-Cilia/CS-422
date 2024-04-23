@@ -1,51 +1,49 @@
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import ky from "ky";
-import { useForm, SubmitHandler } from "react-hook-form";
+import React, { useRef } from 'react';
+import "./App.css";
 
 function App() {
-  const queryClient = useQueryClient();
+  const chapterRef = useRef<HTMLInputElement>(null);
+  const headerRef = useRef<HTMLInputElement>(null);
+  const notesRef = useRef<HTMLTextAreaElement>(null);
 
-  const { data, isLoading, error } = useQuery({
-    queryKey: ["users"],
-    queryFn: async () => {
-      const response = await ky.get("http://localhost:3000/getUsers").json();
+  const handleSaveClick = () => {
+    const chapterValue = chapterRef.current?.value || '';
+    const headerValue = headerRef.current?.value || '';
+    const notesValue = notesRef.current?.value || '';
 
-      console.log(`RESPONSE: ${JSON.stringify(response)}`);
+    console.log('Saving to database...');
+    console.log('Chapter:', chapterValue);
+    console.log('Header:', headerValue);
+    console.log('Notes:', notesValue);
 
-      return response;
-    },
-  });
+    // TODO: Make a function that saves this information in the DB
 
-  const mutation = useMutation({
-    mutationFn: ({ name }: { name: string }) => {
-      console.log(`CREATING: ${name}`);
-      return ky.post("http://localhost:3000/createUser", { json: { name } });
-    },
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["users"] });
-    },
-  });
+    // Clear input fields after saving
+    if (chapterRef.current) chapterRef.current.value = '';
+    if (headerRef.current) headerRef.current.value = '';
+    if (notesRef.current) notesRef.current.value = '';
 
-  const {
-    register,
-    handleSubmit,
-    watch,
-    formState: { errors },
-  } = useForm<{ name: string }>();
+    
+  }
 
   return (
-    <div className="flex flex-col items-center">
-      <h1>Users: {JSON.stringify(data)}</h1>
-      <div>
-        <h1>Create New User:</h1>
-        <form
-          onSubmit={handleSubmit((data) => {
-            mutation.mutate(data);
-          })}
-        >
-          <h1>Name:</h1>
-          <input {...register("name")} className="border-black border-2" />
-        </form>
+    <div className="notes-menu">
+      <div className = "chapter-section">
+        <h1>Chapter:</h1>
+        <input type="text" className= "chapter-input" placeholder = "enter chapter title here..." ref = {chapterRef}/>
+      </div>
+      <div className = "header-section">
+        <h1>Header:</h1>
+        <input type="text" className= "header-input" placeholder = "enter header title here..." ref = {headerRef}/>
+      </div>
+      <div className = "notes-section">
+        <h1>Notes:</h1>
+        <textarea className = "notes-textarea" placeholder = "enter notes here..." ref = {notesRef}/>
+      </div>
+      <div className = "save-section">
+        <button type = "button" className = "save-button" onClick={() => handleSaveClick()}>
+          Save Note!
+        </button>
       </div>
     </div>
   );
