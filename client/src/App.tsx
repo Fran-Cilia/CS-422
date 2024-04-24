@@ -1,53 +1,30 @@
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import ky from "ky";
-import { useForm, SubmitHandler } from "react-hook-form";
+
+import React, {useState} from 'react';
 
 function App() {
-  const queryClient = useQueryClient();
 
-  const { data, isLoading, error } = useQuery({
-    queryKey: ["users"],
-    queryFn: async () => {
-      const response = await ky.get("http://localhost:3000/getUsers").json();
+  // This variable holds all the instructions to follow through the SQ3R format
+  const steps = ["SURVEY: Skim the text focusing on the main ideas (chapters, headers, diagrams, models etc.", 
+                 "QUESTION: Formulate questions based on the observed main ideas.", 
+                 "READ: Read through the text finding answers to your questions.", 
+                 "RECITE: Recite what you learned in your own words", 
+                 "REVIEW: Review the material by reapeating back to yourself the purpose of the passage."];
 
-      console.log(`RESPONSE: ${JSON.stringify(response)}`);
+  // This is the value of the current step
+  const [currentStep, setCurrentStep] = useState(0);
 
-      return response;
-    },
-  });
-
-  const mutation = useMutation({
-    mutationFn: ({ name }: { name: string }) => {
-      console.log(`CREATING: ${name}`);
-      return ky.post("http://localhost:3000/createUser", { json: { name } });
-    },
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["users"] });
-    },
-  });
-
-  const {
-    register,
-    handleSubmit,
-    watch,
-    formState: { errors },
-  } = useForm<{ name: string }>();
+  // If the button is clicked this goes to the next prompt
+  const handleNextStep = () => {
+    setCurrentStep((currentStep) => (currentStep + 1) % 5);
+  };
+  
 
   return (
-    <div className="flex flex-col items-center">
-      <h1>Users: {JSON.stringify(data)}</h1>
-      <div>
-        <h1>Create New User:</h1>
-        <form
-          onSubmit={handleSubmit((data) => {
-            mutation.mutate(data);
-          })}
-        >
-          <h1>Name:</h1>
-          <input {...register("name")} className="border-black border-2" />
-        </form>
-      </div>
+    <div className = "fixed bottom-0 left-0 bg-gray-200 w-3/5 h-24 p-5 border border-gray-300 flex flex-col rounded-md">
+      <h1 className = "text-center">{steps[currentStep]}</h1>
+      <button type = "button" className = "mt-1 p-1 bg-gray-700 text-white rounded-md hover:bg-gray-800" onClick = {() => handleNextStep()}>Next</button>
     </div>
+    
   );
 }
 
