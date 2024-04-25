@@ -3,12 +3,16 @@ import ReactDOM from "react-dom/client";
 import "./index.css";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
-import { Root } from "./views";
+import { Pdfs, Root } from "./views";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <Root />,
+  },
+  {
+    path: "/pdfs",
+    element: <Pdfs />,
   },
 ]);
 
