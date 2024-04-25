@@ -1,9 +1,5 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-<<<<<<< HEAD
-import App from "./temp/App.tsx";
-=======
->>>>>>> main
 import "./index.css";
 import {
   createBrowserRouter,
