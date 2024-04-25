@@ -71,9 +71,9 @@ const Pdfs = () => {
   ];
 
   return (
-    <div className="mx-32 mt-24">
+    <div className="flex flex-col justify-center mx-12 mt-24">
       <h1 className="font-bold text-4xl">Select PDF</h1>
-      <div className="flex flex-wrap mt-12 gap-x-4 gap-y-4">
+      <div className="mt-12 grid grid-cols-4 gap-4">
         {PDF_FILES.map(({ name, author, path }) => (
           <PdfCard name={name} author={author} path={path} />
         ))}
