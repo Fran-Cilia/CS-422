@@ -1,20 +1,24 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import "./index.css";
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import {
+  createBrowserRouter,
+  RouterProvider,
+  createRoutesFromElements,
+  Route,
+} from "react-router-dom";
 
-import { Pdfs, Root } from "./views";
+import { Pdf, Pdfs, Root } from "./views";
 
-const router = createBrowserRouter([
-  {
-    path: "/",
-    element: <Root />,
-  },
-  {
-    path: "/pdfs",
-    element: <Pdfs />,
-  },
-]);
+const router = createBrowserRouter(
+  createRoutesFromElements(
+    <Route>
+      <Route path="/" element={<Root />}></Route>
+      <Route path="pdfs" element={<Pdfs />}></Route>
+      <Route path="pdfs/:pdfPath" element={<Pdf />} />
+    </Route>
+  )
+);
 
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
