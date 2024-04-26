@@ -1,49 +1,27 @@
-import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
-import axios from "axios";
-import { useForm } from "react-hook-form";
+import { useState, createContext} from "react";
+
+
+const userContext = createContext(null)
 
 const Root = () => {
-  const queryClient = useQueryClient();
+  
+  const [user, setUser] = useState('');
 
-  const { isLoading, isError, data } = useQuery({
-    queryKey: ["users"],
-    queryFn: async () => {
-      return (await axios.get("http://localhost:3000/getUsers")).data;
-    },
-  });
-
-  const mutation = useMutation({
-    mutationFn: ({ name }: { name: string }) => {
-      console.log(`CREATING: ${name}`);
-      return axios.post("http://localhost:3000/createUser", { name });
-    },
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["users"] });
-    },
-  });
-
-  const {
-    register,
-    handleSubmit,
-    watch,
-    formState: { errors },
-  } = useForm<{ name: string }>();
+  const handleSetUser = (userName) => {
+    setUser(userName);
+    
+    // TODO switch to PDF viewer screen. User is now set.
+  }
 
   return (
-    <div className="flex flex-col items-center">
-      <h1>Users: {JSON.stringify(data)}</h1>
-      <div>
-        <h1>Create New User:</h1>
-        <form
-          onSubmit={handleSubmit((data) => {
-            mutation.mutate(data);
-          })}
-        >
-          <h1>Name:</h1>
-          <input {...register("name")} className="border-black border-2" />
-        </form>
+    <userContext.Provider value = {user} >
+      <div className="flex flex-col items-center">
+        <h1>Select User:</h1>
+        <button onClick={() => handleSetUser("User 1")}>User 1</button>
+        <button onClick={() => handleSetUser("User 2")}>User 2</button>
+        <button onClick={() => handleSetUser("User 3")}>User 3</button>
       </div>
-    </div>
+    </userContext.Provider>
   );
 };
 
