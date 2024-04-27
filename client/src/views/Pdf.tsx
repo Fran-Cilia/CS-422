@@ -36,11 +36,12 @@ const Answer: React.FC<Omit<Note, "id" | "question">> = ({
   );
 };
 
-const Question: React.FC<Omit<Note, "answer">> = ({
+const Question: React.FC<Omit<Note, "answer"> & { reviewMode: boolean }> = ({
   id,
   chapter,
   header,
   question,
+  reviewMode = false,
 }) => {
   const queryClient = useQueryClient();
 
@@ -73,31 +74,34 @@ const Question: React.FC<Omit<Note, "answer">> = ({
             Question: {question}
           </h1>
         </div>
-        <form
-          className="flex flex-col justify-between mt-8"
-          onSubmit={handleSubmit((data) => {
-            answerQuestionMutation.mutate({ id, ...data });
-            reset();
-          })}
-        >
-          <div className="flex flex-row gap-x-2">
-            <h1>Answer: </h1>
-            <input
-              {...register("answer")}
-              className="border-[#e4e4e7] border-[1px] rounded-md w-full"
-            />
-          </div>
+        {!reviewMode && (
+          <form
+            className="flex flex-col justify-between mt-8"
+            onSubmit={handleSubmit((data) => {
+              answerQuestionMutation.mutate({ id, ...data });
+              reset();
+            })}
+          >
+            <div className="flex flex-row gap-x-2">
+              <h1>Answer: </h1>
+              <input
+                {...register("answer")}
+                className="border-[#e4e4e7] border-[1px] rounded-md w-full"
+              />
+            </div>
 
-          <div className="flex flex-row justify-between mt-8 mb-2">
-            <div></div>
-            <button
-              className="px-2.5 py-1.5 bg-black rounded-md text-sm font-semibold text-white"
-              type="submit"
-            >
-              <h1>Answer Question</h1>
-            </button>
-          </div>
-        </form>
+            <div className="flex flex-row justify-between mt-8 mb-2">
+              <div></div>
+              <button
+                className="px-2.5 py-1.5 bg-black rounded-md text-sm font-semibold text-white"
+                type="submit"
+              >
+                <h1>Answer Question</h1>
+              </button>
+            </div>
+          </form>
+        )}
+
         <div />
       </div>
     </div>
@@ -298,24 +302,38 @@ const Pdf = () => {
               setShowNotes(!showNotes);
             }}
           >
-            {showNotes ? <h1>Hide Notes</h1> : <h1>Show Notes</h1>}
+            {showNotes ? <h1>Review Mode</h1> : <h1>Show Notes</h1>}
           </button>
-          {showNotes && (
+          {showNotes ? (
             <>
-              <h1 className="text-xl font-bold">CREATE QUESTION</h1>
+              <h1 className="text-3xl font-bold">CREATE QUESTION</h1>
               <CreateQuestion pdfId={pdfId!} />
-              <h1 className="text-xl font-bold">QUESTIONS</h1>
+              <h1 className="text-3xl font-bold">QUESTIONS</h1>
               {notesData.questions.map(({ id, chapter, header, question }) => (
                 <Question
                   id={id}
                   chapter={chapter}
                   header={header}
                   question={question}
+                  reviewMode={false}
                 />
               ))}
-              <h1 className="text-xl font-bold">ANSWERS</h1>
+              <h1 className="text-3xl font-bold">ANSWERS</h1>
               {notesData.answers.map(({ chapter, header, answer }) => (
                 <Answer chapter={chapter} header={header} answer={answer} />
+              ))}
+            </>
+          ) : (
+            <>
+              <h1 className="text-3xl font-bold">QUESTIONS</h1>
+              {notesData.questions.map(({ id, chapter, header, question }) => (
+                <Question
+                  id={id}
+                  chapter={chapter}
+                  header={header}
+                  question={question}
+                  reviewMode={true}
+                />
               ))}
             </>
           )}
