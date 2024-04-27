@@ -30,7 +30,8 @@ export const notes = mysqlTable("notes", {
   id: serial("id").primaryKey(),
   chapter: varchar("chapter", { length: 200 }),
   header: varchar("header", { length: 1000 }),
-  body: varchar("body", { length: 5000 }),
+  question: varchar("question", { length: 5000 }),
+  answer: varchar("answer", { length: 5000 }),
   pdfId: bigint("pdfId", { mode: "number" }).references(() => pdfs.id),
 });
 
