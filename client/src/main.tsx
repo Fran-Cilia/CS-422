@@ -15,7 +15,7 @@ const router = createBrowserRouter(
     <Route>
       <Route path="/" element={<Root />}></Route>
       <Route path="pdfs" element={<Pdfs />}></Route>
-      <Route path="pdfs/:pdfPath" element={<Pdf />} />
+      <Route path="pdfs/:pdfId" element={<Pdf />} />
     </Route>
   )
 );

@@ -1,5 +1,6 @@
 import express, { Request } from "express";
-import { db, users } from "./db";
+import { db, notes, pdfs, users } from "./db";
+import { eq, lt, gte, ne } from "drizzle-orm";
 import cors from "cors";
 
 const app = express();
@@ -34,6 +35,85 @@ app.get("/getUsers", async (req, res) => {
   // console.log(`USERS: ${JSON.stringify(result)}`);
 
   res.status(200).json(result);
+});
+
+app.get("/getNotes", async (req: Request<{}, {}, { pdfId: string }>, res) => {
+  const { pdfId } = req.query;
+
+  if (!pdfId) {
+    return res.status(400).send("Bad Request: pdfId not provided");
+  }
+
+  console.log(`FETCHING NOTES FOR PDF ID: ${pdfId}`);
+
+  const result = await db
+    .select()
+    .from(notes)
+    .where(eq(notes.pdfId, parseInt(pdfId as string)));
+
+  return res.status(200).json(result);
+});
+
+app.get("/getPdf", async (req: Request<{}, {}, { pdfId: string }>, res) => {
+  const { pdfId } = req.query;
+
+  if (!pdfId) {
+    return res.status(400).send("Bad Request: pdfId not provided");
+  }
+
+  console.log(`FETCHING PDF ID: ${pdfId}`);
+
+  const result = await db
+    .select()
+    .from(pdfs)
+    .where(eq(pdfs.id, parseInt(pdfId as string)));
+
+  return res.status(200).json(result[0]);
+});
+
+app.post(
+  "/createNote",
+  async (
+    req: Request<
+      {},
+      {},
+      { pdfId: string; chapter: string; header: string; body: string }
+    >,
+    res
+  ) => {
+    const { pdfId, chapter, header, body } = req.body;
+
+    if (!pdfId || !chapter || !header || !body) {
+      return res
+        .status(400)
+        .send("Bad Request, expected pdfId, chapter, header, body");
+    }
+
+    console.log(
+      `CREATING NOTE: pdfID: ${pdfId} | chapter: ${chapter} | header: ${header} | body: ${body}`
+    );
+
+    const result = await db.insert(notes).values({
+      chapter: chapter,
+      header: header,
+      body: body,
+      pdfId: parseInt(pdfId as string),
+    });
+
+    res.status(200).send();
+  }
+);
+
+app.post("/deleteNote", async (req: Request<{}, {}, { id: string }>, res) => {
+  const { id } = req.body;
+
+  if (!id) return res.status(400).send("Bad Request: expected note id");
+
+  const result = await db
+    .delete(notes)
+    .where(eq(notes.id, parseInt(id as string)));
+
+  return res.status(200).send();
 });
 
 app.listen(port, () => {
