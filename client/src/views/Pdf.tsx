@@ -4,6 +4,7 @@ import pg_parPdf from "../assets/pg_par.pdf";
 import { useQuery, useQueryClient, useMutation } from "@tanstack/react-query";
 import axios from "axios";
 import { useForm } from "react-hook-form";
+import { useState } from "react";
 
 type Note = {
   id: string;
@@ -189,6 +190,8 @@ const CreateQuestion: React.FC<{ pdfId: string }> = ({ pdfId }) => {
 const Pdf = () => {
   const { pdfId } = useParams();
 
+  const [showNotes, setShowNotes] = useState(true);
+
   const queryClient = useQueryClient();
 
   const {
@@ -289,133 +292,37 @@ const Pdf = () => {
         <div className="w-1/2 m-8 pb-16 flex flex-col gap-y-4 h-screen overflow-y-auto">
           {/* <h1>PDF Path: {pdfData.path}</h1> */}
           {/* <h1>NOTES DATA: {JSON.stringify(notesData)}</h1> */}
-          <h1 className="text-xl font-bold">CREATE QUESTION</h1>
-          <CreateQuestion pdfId={pdfId!} />
-          <h1 className="text-xl font-bold">QUESTIONS</h1>
-          {notesData.questions.map(({ id, chapter, header, question }) => (
-            <Question
-              id={id}
-              chapter={chapter}
-              header={header}
-              question={question}
-            />
-          ))}
-          <h1 className="text-xl font-bold">ANSWERS</h1>
-          {notesData.answers.map(({ chapter, header, answer }) => (
-            <Answer chapter={chapter} header={header} answer={answer} />
-          ))}
+          <button
+            className="mx-24 mb-8 px-2.5 py-1.5 bg-black rounded-md text-white"
+            onClick={() => {
+              setShowNotes(!showNotes);
+            }}
+          >
+            {showNotes ? <h1>Hide Notes</h1> : <h1>Show Notes</h1>}
+          </button>
+          {showNotes && (
+            <>
+              <h1 className="text-xl font-bold">CREATE QUESTION</h1>
+              <CreateQuestion pdfId={pdfId!} />
+              <h1 className="text-xl font-bold">QUESTIONS</h1>
+              {notesData.questions.map(({ id, chapter, header, question }) => (
+                <Question
+                  id={id}
+                  chapter={chapter}
+                  header={header}
+                  question={question}
+                />
+              ))}
+              <h1 className="text-xl font-bold">ANSWERS</h1>
+              {notesData.answers.map(({ chapter, header, answer }) => (
+                <Answer chapter={chapter} header={header} answer={answer} />
+              ))}
+            </>
+          )}
         </div>
       </div>
     )
   );
-
-  // return (
-  //   notesData &&
-  //   pdfData && (
-  //     <>
-  //       <div className="flex flex-row w-screen h-screen">
-  //         <iframe
-  //           src={(() => {
-  //             if (pdfData.path == "sommerville.pdf") {
-  //               return sommervillePdf;
-  //             } else {
-  //               return sommervillePdf;
-  //             }
-  //           })()}
-  //           className="w-1/2"
-  //         ></iframe>
-  //         <div className="w-1/2 m-8 pb-16 flex flex-col gap-y-4 h-screen overflow-y-auto">
-  //           {/* <h1>PDF Path: {pdfData.path}</h1> */}
-  //           {/* <h1>NOTES DATA: {JSON.stringify(notesData)}</h1> */}
-  //           <div className="border-[#e4e4e7] border-[1px] rounded-xl p-4 flex flex-col justify-between">
-  //             <form
-  //               onSubmit={handleSubmit((data) => {
-  //                 createNoteMutation.mutate({
-  //                   pdfId: pdfId as string,
-  //                   ...data,
-  //                 });
-  //                 reset();
-  //               })}
-  //             >
-  //               <div className="grid grid-cols-2">
-  //                 <div>
-  //                   <h1>Chapter: </h1>
-  //                   <h1>Header: </h1>
-  //                   <h1>Body: </h1>
-  //                 </div>
-  //                 <div>
-  //                   <input
-  //                     {...register("chapter")}
-  //                     className="border-black border-2"
-  //                   />
-  //                   <input
-  //                     {...register("header")}
-  //                     className="border-black border-2"
-  //                   />
-  //                   <input
-  //                     {...register("body")}
-  //                     className="border-black border-2"
-  //                   />
-  //                 </div>
-  //               </div>
-  //               <div className="flex flex-row justify-between">
-  //                 <div />
-  //                 <button
-  //                   className=" bg-black text-white rounded-md px-2 py-1.5 mt-8"
-  //                   type="submit"
-  //                 >
-  //                   <h1 className="text-sm font-medium">Add Note</h1>
-  //                 </button>
-  //               </div>
-  //             </form>
-  //           </div>
-  //           {notesData.map(({ id, chapter, header, body }) => (
-  //             <Note id={id} chapter={chapter} header={header} body={body} />
-  //           ))}
-  //         </div>
-  //       </div>
-  //     </>
-  //   )
-  // );
-
-  // return (
-  // notesData &&
-  // pdfData &&
-  // notesData && pdfData &&
-  // <h1>PDF DATA: {JSON.stringify(pdfData.path)}</h1>
-
-  // (pdfData.path === "sommerville.pdf" ? <h1>Sommerville</h1> : <h1>Other</h1>)
-  // (pdfData.pdfPath == "sommerville.pdf" ? (
-  //   <>
-  //     <div className="flex flex-row w-screen bg-red-200 h-screen">
-  //       <iframe src={sommervillePdf} className="w-1/2"></iframe>
-  //       <h1 className="w-1/2">PDF Path: {pdfData.pdfPath}</h1>
-  //     </div>
-  //   </>
-  // ) : (
-  //   <></>
-  // ))
-  // );
-
-  // if (pdfData?.pdfPath === "sommerville.pdf") {
-  //   return (
-  //     <>
-  //       <div className="flex flex-row w-screen bg-red-200 h-screen">
-  //         <iframe src={sommervillePdf} className="w-1/2"></iframe>
-  //         <h1 className="w-1/2">PDF Path: {pdfData.pdfPath}</h1>
-  //       </div>
-  //     </>
-  //   );
-  // } else if (pdfData?.pdfPath === "pg_par.pdf") {
-  //   return (
-  //     <>
-  //       <div className="flex flex-row w-screen bg-red-200 h-screen">
-  //         <iframe src={pg_parPdf} className="w-1/2"></iframe>
-  //         <h1 className="w-1/2">PDF Path: {pdfData.pdfPath}</h1>
-  //       </div>
-  //     </>
-  //   );
-  // }
 };
 
 export { Pdf };
