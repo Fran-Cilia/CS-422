@@ -8,12 +8,11 @@ import {
   Route,
 } from "react-router-dom";
 
-import { Pdf, Pdfs, Root, Login } from "./views";
+import { Pdf, Pdfs, Login } from "./views";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route>
-      <Route path="/" element={<Root />}></Route>
       <Route path="/login" element={<Login />}></Route>
       <Route path="pdfs" element={<Pdfs />}></Route>
       <Route path="pdfs/:pdfId" element={<Pdf />} />
@@ -29,7 +28,6 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
     <QueryClientProvider client={queryClient}>
       <RouterProvider router={router} />
-      {/* <App /> */}
     </QueryClientProvider>
   </React.StrictMode>
 );
