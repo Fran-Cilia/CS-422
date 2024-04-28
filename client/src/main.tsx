@@ -8,12 +8,13 @@ import {
   Route,
 } from "react-router-dom";
 
-import { Pdf, Pdfs, Root } from "./views";
+import { Pdf, Pdfs, Root, Login } from "./views";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route>
       <Route path="/" element={<Root />}></Route>
+      <Route path="/login" element={<Login />}></Route>
       <Route path="pdfs" element={<Pdfs />}></Route>
       <Route path="pdfs/:pdfId" element={<Pdf />} />
     </Route>

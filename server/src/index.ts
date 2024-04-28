@@ -71,6 +71,21 @@ app.get("/getPdf", async (req: Request<{}, {}, { pdfId: string }>, res) => {
   return res.status(200).json(result[0]);
 });
 
+app.get("/getPdfs", async (req: Request<{}, {}, { userId: string }>, res) => {
+  const { userId } = req.query;
+
+  if (!userId) {
+    return res.status(400).send("Bad Request: userId not provided");
+  }
+
+  const result = await db
+    .select()
+    .from(pdfs)
+    .where(eq(pdfs.pdfOwnerId, parseInt(userId as string)));
+
+  return res.status(200).json(result);
+});
+
 // app.post(
 //   "/createNote",
 //   async (
