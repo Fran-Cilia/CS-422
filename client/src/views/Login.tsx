@@ -18,7 +18,7 @@ const UserProfile: React.FC<{ id: number; name: string; pfpPath: string }> = ({
 
   return (
     <button
-      className="flex flex-col items-center border-[1px] border-[#e4e4e7] rounded-xl p-2"
+      className="flex flex-col items-center border-[1px] border-[#e4e4e7] rounded-xl p-8"
       onClick={() => {
         updateUserId(id);
         nav("/pdfs");
@@ -45,9 +45,19 @@ const Login = () => {
         <h1 className="mt-12 text-4xl font-semibold">Select User</h1>
 
         <div className="flex flex-row items-center gap-x-8 mt-24">
-          {data.map(({ id, name }: { id: number; name: string }) => (
-            <UserProfile id={id} name={name} pfpPath="/spike.png" />
-          ))}
+          {data.map(
+            ({
+              id,
+              name,
+              pfpPath,
+            }: {
+              id: number;
+              name: string;
+              pfpPath: string;
+            }) => (
+              <UserProfile id={id} name={name} pfpPath={pfpPath} />
+            )
+          )}
         </div>
       </div>
     )

@@ -34,45 +34,6 @@ const PdfCard: React.FC<pdf> = ({ id, name, author, path }) => {
 };
 
 const Pdfs = () => {
-  // const PDF_FILES: Array<pdf> = [
-  //   {
-  //     id: 59,
-  //     name: "Sommerville Chapter 6",
-  //     author: "Sommerville",
-  //     path: "sommerville.pdf",
-  //   },
-  //   {
-  //     id: 59,
-  //     name: "ENGLISH FOR SCIENCE AND TECHNOLOGY",
-  //     author: "Huckin & Olsen",
-  //     path: "pg_par.pdf",
-  //   },
-  //   {
-  //     id: 59,
-  //     name: "Sommerville Chapter 6",
-  //     author: "Sommerville",
-  //     path: "sommerville.pdf",
-  //   },
-  //   {
-  //     id: 59,
-  //     name: "ENGLISH FOR SCIENCE AND TECHNOLOGY",
-  //     author: "Huckin & Olsen",
-  //     path: "pg_par.pdf",
-  //   },
-  //   {
-  //     id: 59,
-  //     name: "Sommerville Chapter 6",
-  //     author: "Sommerville",
-  //     path: "sommerville.pdf",
-  //   },
-  //   {
-  //     id: 59,
-  //     name: "ENGLISH FOR SCIENCE AND TECHNOLOGY",
-  //     author: "Huckin & Olsen",
-  //     path: "pg_par.pdf",
-  //   },
-  // ];
-
   const user = useUserStore((state) => (state as UserStoreState).userId);
 
   const { isLoading, isError, data } = useQuery({
@@ -92,7 +53,7 @@ const Pdfs = () => {
     data && (
       <div className="flex flex-col justify-center mx-12 mt-24">
         {/* <h1>USER: {user}</h1> */}
-        <h1>PDFS: {JSON.stringify(data)}</h1>
+        {/* <h1>PDFS: {JSON.stringify(data)}</h1> */}
         <h1 className="font-bold text-4xl">Select PDF</h1>
         <div className="mt-12 grid grid-cols-4 gap-4">
           {data.map(({ id, name, author, path }) => (

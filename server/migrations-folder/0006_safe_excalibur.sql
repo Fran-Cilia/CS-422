@@ -1,0 +1,1 @@
+ALTER TABLE `users` ADD `pdpPath` varchar(50);

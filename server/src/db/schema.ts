@@ -14,6 +14,7 @@ import {
 export const users = mysqlTable("users", {
   id: serial("id").primaryKey(),
   name: varchar("name", { length: 30 }),
+  pfpPath: varchar("pdpPath", { length: 50 }),
 });
 
 export const pdfs = mysqlTable("pdfs", {
