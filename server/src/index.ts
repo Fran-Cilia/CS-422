@@ -9,30 +9,8 @@ const port = process.env.SERVER_PORT || 3000;
 app.use(express.json());
 app.use(cors<Request>());
 
-app.get("/", (req, res) => {
-  res.send("Hello World from Express 1");
-});
-
-app.post("/createUser", async (req, res) => {
-  if (!req.body.name) {
-    return res.status(400).send("Bad Request: User name not provided");
-  }
-
-  const { name } = req.body;
-
-  try {
-    const result = await db.insert(users).values({ name });
-  } catch (e) {
-    return res.status(500).send(`Internal Server Error: ${e}`);
-  }
-
-  return res.status(200).send();
-});
-
 app.get("/getUsers", async (req, res) => {
   const result = await db.select().from(users);
-
-  // console.log(`USERS: ${JSON.stringify(result)}`);
 
   res.status(200).json(result);
 });
@@ -86,39 +64,6 @@ app.get("/getPdfs", async (req: Request<{}, {}, { userId: string }>, res) => {
   return res.status(200).json(result);
 });
 
-// app.post(
-//   "/createNote",
-//   async (
-//     req: Request<
-//       {},
-//       {},
-//       { pdfId: string; chapter: string; header: string; body: string }
-//     >,
-//     res
-//   ) => {
-//     const { pdfId, chapter, header, body } = req.body;
-
-//     if (!pdfId || !chapter || !header || !body) {
-//       return res
-//         .status(400)
-//         .send("Bad Request, expected pdfId, chapter, header, body");
-//     }
-
-//     console.log(
-//       `CREATING NOTE: pdfID: ${pdfId} | chapter: ${chapter} | header: ${header} | body: ${body}`
-//     );
-
-//     const result = await db.insert(notes).values({
-//       chapter: chapter,
-//       header: header,
-//       body: body,
-//       pdfId: parseInt(pdfId as string),
-//     });
-
-//     res.status(200).send();
-//   }
-// );
-
 app.post(
   "/createQuestion",
   async (
@@ -171,18 +116,6 @@ app.post(
     res.status(200).send();
   }
 );
-
-app.post("/deleteNote", async (req: Request<{}, {}, { id: string }>, res) => {
-  const { id } = req.body;
-
-  if (!id) return res.status(400).send("Bad Request: expected note id");
-
-  const result = await db
-    .delete(notes)
-    .where(eq(notes.id, parseInt(id as string)));
-
-  return res.status(200).send();
-});
 
 app.listen(port, () => {
   console.log(`Server is running on http://localhost:${port}`);
