@@ -19,9 +19,11 @@ const PDFs = [
   console.log("CREATING USERS");
 
   await db.transaction(async (tx) => {
-    await db.insert(users).values({ name: "Tom Cat" });
-    await db.insert(users).values({ name: "Jerry Mouse" });
-    await db.insert(users).values({ name: "Spike Dog" });
+    await db.insert(users).values({ name: "Tom Cat", pfpPath: "/tom.png" });
+    await db
+      .insert(users)
+      .values({ name: "Jerry Mouse", pfpPath: "/jerry.png" });
+    await db.insert(users).values({ name: "Spike Dog", pfpPath: "/spike.png" });
   });
 
   console.log("CREATING PDFS FOR USERS");
@@ -58,19 +60,22 @@ const PDFs = [
         await db.insert(notes).values({
           chapter: "Minim nulla elit reprehe",
           header: "Minim nulla elit reprehenderit eu anim in quis nulla.",
-          body: "Id aute non voluptate. Cillum quis nulla labore pariatur. Qui ex consequat enim proident ipsum veniam officia sit est. Irure ad dolore nostrud sint veniam qui aute Lorem occaecat ad.",
+          question:
+            "Id aute non voluptate. Cillum quis nulla labore pariatur. Qui ex consequat enim proident ipsum veniam officia sit est. Irure ad dolore nostrud sint veniam qui aute Lorem occaecat ad.",
           pdfId: id,
         });
         await db.insert(notes).values({
           chapter: "Minim nulla elit reprehe",
           header: "Minim nulla elit reprehenderit eu anim in quis nulla.",
-          body: "Id aute non voluptate. Cillum quis nulla labore pariatur. Qui ex consequat enim proident ipsum veniam officia sit est. Irure ad dolore nostrud sint veniam qui aute Lorem occaecat ad.",
+          question:
+            "Id aute non voluptate. Cillum quis nulla labore pariatur. Qui ex consequat enim proident ipsum veniam officia sit est. Irure ad dolore nostrud sint veniam qui aute Lorem occaecat ad.",
           pdfId: id,
         });
         await db.insert(notes).values({
           chapter: "Minim nulla elit reprehe",
           header: "Minim nulla elit reprehenderit eu anim in quis nulla.",
-          body: "Id aute non voluptate. Cillum quis nulla labore pariatur. Qui ex consequat enim proident ipsum veniam officia sit est. Irure ad dolore nostrud sint veniam qui aute Lorem occaecat ad.",
+          question:
+            "Id aute non voluptate. Cillum quis nulla labore pariatur. Qui ex consequat enim proident ipsum veniam officia sit est. Irure ad dolore nostrud sint veniam qui aute Lorem occaecat ad.",
           pdfId: id,
         });
       })

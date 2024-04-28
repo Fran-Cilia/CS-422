@@ -43,6 +43,13 @@
       "when": 1714251029582,
       "tag": "0005_small_mesmero",
       "breakpoints": true
+    },
+    {
+      "idx": 6,
+      "version": "5",
+      "when": 1714285678818,
+      "tag": "0006_safe_excalibur",
+      "breakpoints": true
     }
   ]
 }

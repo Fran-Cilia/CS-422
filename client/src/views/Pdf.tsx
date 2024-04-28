@@ -326,15 +326,17 @@ const Pdf = () => {
           ) : (
             <>
               <h1 className="text-3xl font-bold">QUESTIONS</h1>
-              {notesData.questions.map(({ id, chapter, header, question }) => (
-                <Question
-                  id={id}
-                  chapter={chapter}
-                  header={header}
-                  question={question}
-                  reviewMode={true}
-                />
-              ))}
+              {[...notesData.questions, ...notesData.answers].map(
+                ({ id, chapter, header, question }) => (
+                  <Question
+                    id={id}
+                    chapter={chapter}
+                    header={header}
+                    question={question}
+                    reviewMode={true}
+                  />
+                )
+              )}
             </>
           )}
         </div>
