@@ -94,11 +94,13 @@ foo@bar:~$ npm run dev
 Server is running on http://localhost:3000
 ```
 
+## --- OPEN A NEW TERMINAL WINDOW BEFORE PROCEEDING. ---
+
+## CLIENT AND SERVER MUST BE RUNNING AT THE SAME TIME.
+
 ## 4. Setting up Client
 
 The code for the client can be found in the client directory. Using React.js with Vite as the react framework and typescript.
-
-**OPEN A NEW TERMINAL WINDOW BEFORE PROCEEDING. CLIENT AND SERVER MUST BE RUNNING AT THE SAME TIME.**
 
 1. cd into ./client (**RUN COMMAND FROM PROJECT ROOT**)
 
