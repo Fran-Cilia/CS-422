@@ -1,51 +1,31 @@
-import mysql from "mysql2/promise";
-import { drizzle } from "drizzle-orm/mysql2";
-import { relations } from "drizzle-orm";
-import {
-  int,
-  mysqlEnum,
-  mysqlTable,
-  uniqueIndex,
-  varchar,
-  serial,
-  bigint,
-} from "drizzle-orm/mysql-core";
+import { drizzle, BetterSQLite3Database } from "drizzle-orm/better-sqlite3";
+import { integer, sqliteTable, text } from "drizzle-orm/sqlite-core";
+import Database from "better-sqlite3";
 
-export const users = mysqlTable("users", {
-  id: serial("id").primaryKey(),
-  name: varchar("name", { length: 30 }),
-  pfpPath: varchar("pdpPath", { length: 50 }),
+export const users = sqliteTable("users", {
+  id: integer("id").primaryKey(),
+  name: text("name"),
+  pfpPath: text("pdpPath"),
 });
 
-export const pdfs = mysqlTable("pdfs", {
-  id: serial("id").primaryKey(),
-  name: varchar("name", { length: 40 }),
-  author: varchar("author", { length: 80 }),
-  path: varchar("path", { length: 20 }),
-  pdfOwnerId: bigint("pdfOwnerId", { mode: "number" }).references(
-    () => users.id
-  ),
+export const pdfs = sqliteTable("pdfs", {
+  id: integer("id").primaryKey(),
+  name: text("name"),
+  author: text("author"),
+  path: text("path"),
+  pdfOwnerId: integer("pdfOwnerId").references(() => users.id),
 });
 
-export const notes = mysqlTable("notes", {
-  id: serial("id").primaryKey(),
-  chapter: varchar("chapter", { length: 200 }),
-  header: varchar("header", { length: 1000 }),
-  question: varchar("question", { length: 5000 }),
-  answer: varchar("answer", { length: 5000 }),
-  pdfId: bigint("pdfId", { mode: "number" }).references(() => pdfs.id),
+export const notes = sqliteTable("notes", {
+  id: integer("id").primaryKey(),
+  chapter: text("chapter"),
+  header: text("header"),
+  question: text("question"),
+  answer: text("answer"),
+  pdfId: integer("pdfId").references(() => pdfs.id),
 });
 
-const poolConnection = mysql.createPool({
-  host: "localhost",
-  port: 3307,
-  user: "root",
-  database: "test",
-  password: "password",
-});
+const sqlite = new Database("sqlite.db");
+const db: BetterSQLite3Database = drizzle(sqlite);
 
-type User = typeof users.$inferSelect;
-const db = drizzle(poolConnection);
-
-export type { User };
 export { db };

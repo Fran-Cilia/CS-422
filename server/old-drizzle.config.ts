@@ -3,8 +3,12 @@ import type { Config } from "drizzle-kit";
 export default {
   schema: "./src/db/schema.ts",
   out: "./drizzle",
-  driver: "better-sqlite",
+  driver: "mysql2",
   dbCredentials: {
-    url: "./sqlite.db",
+    host: "localhost",
+    port: 3307,
+    user: "root",
+    database: "test",
+    password: "password",
   },
 } satisfies Config;
