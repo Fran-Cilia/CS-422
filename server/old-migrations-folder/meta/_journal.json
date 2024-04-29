@@ -1,0 +1,62 @@
+{
+  "version": "5",
+  "dialect": "mysql",
+  "entries": [
+    {
+      "idx": 0,
+      "version": "5",
+      "when": 1714090896386,
+      "tag": "0000_romantic_katie_power",
+      "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "5",
+      "when": 1714091647411,
+      "tag": "0001_calm_nightshade",
+      "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "5",
+      "when": 1714092870881,
+      "tag": "0002_jittery_lilith",
+      "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "5",
+      "when": 1714095240487,
+      "tag": "0003_right_junta",
+      "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "5",
+      "when": 1714095934084,
+      "tag": "0004_uneven_doctor_octopus",
+      "breakpoints": true
+    },
+    {
+      "idx": 5,
+      "version": "5",
+      "when": 1714251029582,
+      "tag": "0005_small_mesmero",
+      "breakpoints": true
+    },
+    {
+      "idx": 6,
+      "version": "5",
+      "when": 1714285678818,
+      "tag": "0006_safe_excalibur",
+      "breakpoints": true
+    },
+    {
+      "idx": 7,
+      "version": "5",
+      "when": 1714348006096,
+      "tag": "0007_cynical_skin",
+      "breakpoints": true
+    }
+  ]
+}
