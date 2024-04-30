@@ -4,6 +4,7 @@
 import { db, notes, pdfs, users } from "../db";
 import { eq } from "drizzle-orm";
 
+// define the default PDFs each user will be given
 const PDFs = [
   {
     name: "Sommerville Chapter 5",
@@ -35,16 +36,23 @@ const PDFs = [
 (async () => {
   console.log("INITIALIZING DB");
 
+  //create the default uers
   console.log("CREATING USERS");
 
   await db.transaction(async (tx) => {
+    //create user Tom Cat
     await db.insert(users).values({ name: "Tom Cat", pfpPath: "/tom.png" });
+
+    //create user Jerry Mouse
     await db
       .insert(users)
       .values({ name: "Jerry Mouse", pfpPath: "/jerry.png" });
+
+    //create user Spike Dog
     await db.insert(users).values({ name: "Spike Dog", pfpPath: "/spike.png" });
   });
 
+  //create default Pdfs for users
   console.log("CREATING PDFS FOR USERS");
 
   await db.transaction(async (tx) => {
@@ -68,6 +76,7 @@ const PDFs = [
     );
   });
 
+  //create sample notes for sommerville chapter 22 for each user
   console.log("CREATING SAMPLE NOTES FOR PDFS");
 
   await db.transaction(async (tx) => {
@@ -489,25 +498,11 @@ const PDFs = [
             "Team members communicate best in a two-way manner, allowing for discussion both ways. Informal communications often work best for this, because meetings can be dominated by the larger personalities or more experienced members.",
           pdfId: id,
         });
-
-        // await db.insert(notes).values({
-        //   chapter: "Minim nulla elit reprehe",
-        //   header: "Minim nulla elit reprehenderit eu anim in quis nulla.",
-        //   question:
-        //     "Id aute non voluptate. Cillum quis nulla labore pariatur. Qui ex consequat enim proident ipsum veniam officia sit est. Irure ad dolore nostrud sint veniam qui aute Lorem occaecat ad.",
-        //   pdfId: id,
-        // });
-        // await db.insert(notes).values({
-        //   chapter: "Minim nulla elit reprehe",
-        //   header: "Minim nulla elit reprehenderit eu anim in quis nulla.",
-        //   question:
-        //     "Id aute non voluptate. Cillum quis nulla labore pariatur. Qui ex consequat enim proident ipsum veniam officia sit est. Irure ad dolore nostrud sint veniam qui aute Lorem occaecat ad.",
-        //   pdfId: id,
-        // });
       })
     );
   });
 
+  //exit from script
   console.log("DONE");
   process.exit();
 })();
