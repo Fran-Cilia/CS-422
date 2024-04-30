@@ -3,7 +3,10 @@
 /// DESCRIPTION: Pdf.tsx: Describes the PDF Viewer component that displays arbitrary PDFs as part of the note taking page.
 import { useParams } from "react-router-dom";
 import sommervillePdf from "../assets/sommerville.pdf";
-// import pg_parPdf from "../assets/pg_par.pdf";
+import som5 from "../assets/som5.pdf";
+import som6 from "../assets/som6.pdf";
+import som7 from "../assets/som7.pdf";
+import som22 from "../assets/som22.pdf";
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import { useForm } from "react-hook-form";
@@ -85,8 +88,14 @@ const Pdf = () => {
       <div className="flex flex-row w-screen h-screen">
         <iframe
           src={(() => {
-            if (pdfData.path == "sommerville.pdf") {
-              return sommervillePdf;
+            if (pdfData.path == "som5.pdf") {
+              return som5;
+            } else if (pdfData.path == "som6.pdf") {
+              return som6;
+            } else if (pdfData.path == "som7.pdf") {
+              return som7;
+            } else if (pdfData.path == "som22.pdf") {
+              return som22;
             } else {
               return sommervillePdf;
             }
