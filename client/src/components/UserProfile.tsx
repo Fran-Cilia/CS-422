@@ -1,3 +1,6 @@
+/// AUTHORS: NA, FC, VD, RK, AP
+/// LAST EDITED: 4-29-2024
+/// DESCRIPTION: UserProfile.tsx: Describes the user profiles shown on the User selection page.  
 import { useNavigate } from "react-router-dom";
 import { useUserStore } from "../store";
 import type { UserStoreState } from "../store";

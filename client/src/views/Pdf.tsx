@@ -1,3 +1,6 @@
+/// AUTHORS: NA, FC, VD, RK, AP
+/// LAST EDITED: 4-29-2024
+/// DESCRIPTION: Pdf.tsx: Describes the PDF Viewer component that displays arbitrary PDFs as part of the note taking page.
 import { useParams } from "react-router-dom";
 import sommervillePdf from "../assets/sommerville.pdf";
 // import pg_parPdf from "../assets/pg_par.pdf";

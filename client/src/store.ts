@@ -1,3 +1,6 @@
+/// AUTHORS: NA, FC, VD, RK, AP
+/// LAST EDITED: 4-29-2024
+/// DESCRIPTION: store.ts: describes interface for client-server communications and persistent client data.
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
 
