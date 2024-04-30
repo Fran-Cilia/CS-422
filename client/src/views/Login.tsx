@@ -5,14 +5,18 @@ import axios from "axios";
 import { useQuery } from "@tanstack/react-query";
 import { UserProfile } from "../components";
 
+// Component representing the login page
 const Login = () => {
+  // Fetching user data using React Query
   const { isLoading, isError, data } = useQuery({
     queryKey: ["users"],
     queryFn: async () => {
+      // Fetching user data from the ARS
       return (await axios.get("http://localhost:3000/getUsers")).data;
     },
   });
 
+  // Rendering user profiles if data is available
   return (
     data && (
       <div className="h-screen flex flex-col items-center">
