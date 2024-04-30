@@ -8,7 +8,7 @@ import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import { useForm } from "react-hook-form";
 import { useState } from "react";
-import { Question, Answer, CreateQuestion } from "../components";
+import { Question, Answer, CreateQuestion, UserGuide } from "../components";
 
 type Note = {
   id: string;
@@ -89,6 +89,7 @@ const Pdf = () => {
         <div className="w-1/2 m-8 pb-16 flex flex-col gap-y-4 h-screen overflow-y-auto">
           {/* <h1>PDF Path: {pdfData.path}</h1> */}
           {/* <h1>NOTES DATA: {JSON.stringify(notesData)}</h1> */}
+          <UserGuide />
           <button
             className="mx-24 mb-8 px-2.5 py-1.5 bg-black rounded-md text-white"
             onClick={() => {
