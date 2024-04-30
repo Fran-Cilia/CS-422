@@ -1,0 +1,92 @@
+AUTHORS: Nabil Abdel-Rahman, Francisco Cilia, Valerie Dagley, Ronan Kelly, Abhinav Palacharla
+
+CREATED: April 29th 2024
+
+Programmer Documentation:
+ - README.txt contains a basic overview of the system and how each folder interacts with eachother.
+ - Inside each of the main source folders, there is a FolderOverview.txt that describes all of the files in the folder and how they are related with eachother
+ - Each of the editable source files contains a brief description of what is contained in that file.
+
+Copies of each of the FolderOverview.txt files and the decriptions of each source file is included below.
+
+
+##############################################################################################################################
+################################################# client/FolderOverview.txt: #################################################
+##############################################################################################################################
+FOLDER DESCRIPTION: The client folder holds all relevant code related to the display layer. This includes the Login, PDF Menu, PDF Viewer, and Note Taking Editor components. 
+It's also important to note that some of these components can perform calls that connect to the code in the server folder.
+
+EXECUTION: The execution of this folder falls on main.tsx and index.tsx, they handle the interactions between the components and perform the actual rendering.
+
+FOLDER STRUCTURE:
+├─ client (ARA CLIENT APPLICATION CODE)
+│  ├─ package.json (DEFINE DEPENDENCIES AND SCRIPTS FOR ARA CLIENT)
+│  ├─ node_modules (STORE DEPENDENCIES AFTER INSTALLATION)
+│  │  └─ ... (SEQUENCE OF DEPENDENCY SOURCE CODE)
+│  ├─ public (CLIENT SIDE STATIC ASSETS - IMAGES)
+│  └─ src (SOURCE CODE)
+│     ├─ assets (HOLD PRELOADED PDF FILES)
+│     ├─ components (MODULAR REACT COMPONENTS FOR BUILDING PAGE)
+
+################################################# client/src/main.tsx: #######################################################
+Main application file. Combines all sub-files into a single navigable application.
+
+################################################# client/src/components/Answer.tsx: ##########################################
+Describes the "answer" component which contains all data related to a question answer object.
+
+################################################# client/src/components/CreateQuestion.tsx: ##################################
+Describes the input form used to create a new question on the Note Taking page.
+
+################################################# client/src/components/PdfCard.tsx: #########################################
+Describes the cards shown on the Document Selection.
+
+################################################# client/src/components/Question.tsx: ########################################
+Describes the "question" component which contains all of the data related to a question object. 
+
+################################################# client/src/components/UserGuide.tsx: #######################################
+Describes the component that controls the step-by-step intro guide to SQ3R.
+
+################################################# client/src/components/UserProfile.tsx: #####################################
+Describes the user profiles shown on the User selection page. 
+
+################################################# client/src/views/Login.tsx #################################################
+Describes the format of the login page as well as all styling. 
+
+################################################# client/src/views/Pdf.tsx ###################################################
+Describes the PDF Viewer component that displays arbitrary PDFs as part of the note taking page.
+
+################################################# client/src/views/Pdfs.tsx ##################################################
+Describes the interface used to request PDFs from the server in order to display them on the note taking page.
+
+##############################################################################################################################
+################################################# server/FolderOverview.txt ##################################################
+##############################################################################################################################
+FOLDER DESCRIPTION: The server folder holds all relevant code related to the storage and retrieval of user data in the service layer.
+This includes the Active Reading Server (ARS), Reading Data Repository (RDR), and Drizzle ORM. 
+
+Execution: The exeuction of this folder falls mainly on the index.ts file, which acts as the ARS and redirects queries
+to drizzle which then creates safe queries which are used to the access the RDR.
+
+FOLDER STRUCTURE:
+├─ server
+│  ├─ package.json (DEFINE DEPENDENCIES AND SCRIPTS FOR SQ3R SERVER)
+│  ├─ node_modules (STORE DEPENDENCIES AFTER INSTALLATION)
+│  │  └─ ... (SEQUENCE OF DEPENDENCY SOURCE CODE)
+│  └─ drizzle (COMPILED DATABASE DRIVER AFTER `npm run schema-push`)
+│  └─ migrations-folder (SQL MIGRATIONS)
+│  │  └─ ... (SEQUENCE OF MIGRATIONS)
+│  └─ drizzle (COMPILED DATABASE DRIVER AFTER `npm run schema-push`)
+│  └─ src (SOURCE CODE)
+│     └─ index.ts (MAIN SERVER FILE, HOLDS ALL API ROUTES)
+
+################################################# server/src/index.ts #######################################################
+Describes all of the get/post request routes allowable with this server.
+
+################################################# server/src/initDB.ts ######################################################
+Script that runs to set up the default values in the database. Essentially, preloads data used for testing/demo.
+
+################################################# server/src/db/index.ts ####################################################
+Links to the database schema and makes it accessible to higher up files.
+
+################################################# server/src/db/schema.ts ###################################################
+Describes the database schemas (datastructures) used for storing different data.
