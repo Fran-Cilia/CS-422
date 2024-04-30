@@ -8,8 +8,9 @@ import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import { useForm } from "react-hook-form";
 import { useState } from "react";
-import { Question, Answer, CreateQuestion } from "../components";
+import { Question, Answer, CreateQuestion, UserGuide } from "../components";
 
+// Define the structure of notes
 type Note = {
   id: string;
   chapter: string;
@@ -18,11 +19,13 @@ type Note = {
   answer: string;
 };
 
+// PDF Viewer component
 const Pdf = () => {
   const { pdfId } = useParams();
 
   const [showNotes, setShowNotes] = useState(true);
 
+  // Query to fetch notes data
   const {
     isLoading: notesIsLoading,
     isError: notesIsError,
@@ -30,6 +33,7 @@ const Pdf = () => {
   } = useQuery({
     queryKey: ["notes"],
     queryFn: async () => {
+      // Receive notes data from the ARS
       const result = (
         await axios.get("http://localhost:3000/getNotes", {
           params: {
@@ -47,6 +51,7 @@ const Pdf = () => {
 
   console.log(`NOTES DATA: ${JSON.stringify(notesData)}`);
 
+  // Query to fetch PDF data
   const {
     isLoading: pdfIsLoading,
     isError: pdfIsError,
@@ -54,6 +59,7 @@ const Pdf = () => {
   } = useQuery({
     queryKey: ["pdf"],
     queryFn: async () => {
+      // Fetch PDF data from the ARS
       return (
         await axios.get("http://localhost:3000/getPdf", {
           params: {
@@ -72,6 +78,7 @@ const Pdf = () => {
     formState: { errors },
   } = useForm<{ chapter: string; header: string; body: string }>();
 
+  // Render the components
   return (
     notesData &&
     pdfData && (
@@ -89,6 +96,7 @@ const Pdf = () => {
         <div className="w-1/2 m-8 pb-16 flex flex-col gap-y-4 h-screen overflow-y-auto">
           {/* <h1>PDF Path: {pdfData.path}</h1> */}
           {/* <h1>NOTES DATA: {JSON.stringify(notesData)}</h1> */}
+          <UserGuide />
           <button
             className="mx-24 mb-8 px-2.5 py-1.5 bg-black rounded-md text-white"
             onClick={() => {

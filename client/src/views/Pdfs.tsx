@@ -7,6 +7,7 @@ import axios from "axios";
 import { useQuery } from "@tanstack/react-query";
 import { PdfCard } from "../components";
 
+// Define the structure of a PDF
 type pdf = {
   id: string;
   name: string;
@@ -14,9 +15,11 @@ type pdf = {
   path: string;
 };
 
+// Component for displaying PDFs available for the user
 const Pdfs = () => {
   const user = useUserStore((state) => (state as UserStoreState).userId);
 
+  // Query to fetch PDFs data
   const { isLoading, isError, data } = useQuery({
     queryKey: ["pdfs"],
     queryFn: async () => {
@@ -30,6 +33,7 @@ const Pdfs = () => {
     },
   });
 
+  // Render the component
   return (
     data && (
       <div className="flex flex-col justify-center mx-12 mt-24">
