@@ -9,9 +9,10 @@ type Note = {
   answer: string;
 };
 
-const Answer: React.FC<Omit<Note, "id" | "question">> = ({
+const Answer: React.FC<Omit<Note, "id">> = ({
   chapter,
   header,
+  question,
   answer,
 }) => {
   return (
@@ -21,6 +22,9 @@ const Answer: React.FC<Omit<Note, "id" | "question">> = ({
           <h1 className="font-bold text-2xl">{chapter}</h1>
           <h1 className="mt-2 text-md font-light text-[#71717a]">
             Header: {header}
+          </h1>
+          <h1 className="mt-2 text-md font-light text-[#71717a]">
+            Question: {question}
           </h1>
           <h1 className="mt-2 text-md font-light text-[#71717a]">
             Answer: {answer}

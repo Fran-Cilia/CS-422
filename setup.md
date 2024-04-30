@@ -13,12 +13,21 @@ Setting up the server and client will require that you have Node.js installed
 1. Install Node.js from here: https://nodejs.org/en/download **DOWNLOAD NODE v20.12.2(LTS)**
 2. Open your downloads folder and find the node-v20.12.2.pkg file.
 3. Execute (double click) the node-v20.12.2.pkg file and follow the steps in the guided installer
+
+- Introduction Section: Click Continue
+- License Section: Click Continue, then Agree to the License
+- Installation Type Section: Click install then authenticate with your system account's username and password
+- Summary Section: Click Close
+- Move the Node.js installer to Trash
+
 4. After completing the installation check you can access node in your terminal by running the following command:
 
 ```console
 foo@bar:~$ node --version
 v20.12.2
 ```
+
+### IF YOU ARE UNABLE TO SETUP NODE.JS, PLEASE REACH OUT - AS THE APPLICATION WILL NOT WORK.
 
 ### --- DO NOT BEGIN SERVER, CLIENT, OR DATABASE WITHOUT SETTING UP NODE.JS ---
 
