@@ -1,3 +1,6 @@
+/// AUTHORS: NA, FC, VD, RK, AP
+/// LAST EDITED: 4-29-2024
+/// DESCRIPTION: PdfCard.tsx: Describes the cards shown on the Document Selection. 
 import { useNavigate } from "react-router-dom";
 
 const PdfCard: React.FC<{ id: string; name: string; author: string }> = ({

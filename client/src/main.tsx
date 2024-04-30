@@ -1,3 +1,6 @@
+/// AUTHORS: NA, FC, VD, RK, AP
+/// LAST EDITED: 4-29-2024
+/// DESCRIPTION: main.tsx: Main application file. Combines all sub-files into a single navigable application.
 import React from "react";
 import ReactDOM from "react-dom/client";
 import "./index.css";

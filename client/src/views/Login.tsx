@@ -1,3 +1,6 @@
+/// AUTHORS: NA, FC, VD, RK, AP
+/// LAST EDITED: 4-29-2024
+/// DESCRIPTION: Login.tsx: Describes the format of the login page as well as all styling. 
 import axios from "axios";
 import { useQuery } from "@tanstack/react-query";
 import { UserProfile } from "../components";

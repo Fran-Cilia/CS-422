@@ -1,3 +1,6 @@
+/// AUTHORS: NA, FC, VD, RK, AP
+/// LAST EDITED: 4-29-2024
+/// DESCRIPTION: Pdfs.tsx: Describes the interface used to request PDFs from the server in order to display them on the note taking page.
 import { useUserStore } from "../store";
 import type { UserStoreState } from "../store";
 import axios from "axios";

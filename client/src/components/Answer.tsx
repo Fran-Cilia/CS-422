@@ -1,3 +1,6 @@
+/// AUTHORS: NA, FC, VD, RK, AP
+/// LAST EDITED: 4-29-2024
+/// DESCRIPTION: Answer.tsx: Describes the "answer" component which contains all data related to a question answer object.
 type Note = {
   id: string;
   chapter: string;
