@@ -5,6 +5,7 @@ import { useQueryClient, useMutation } from "@tanstack/react-query";
 import axios from "axios";
 import { useForm } from "react-hook-form";
 
+// Define the structure of a note
 type Note = {
   id: string;
   chapter: string;
@@ -13,6 +14,7 @@ type Note = {
   answer: string;
 };
 
+// Define the Question component
 const Question: React.FC<Omit<Note, "answer"> & { reviewMode: boolean }> = ({
   id,
   chapter,
@@ -20,9 +22,11 @@ const Question: React.FC<Omit<Note, "answer"> & { reviewMode: boolean }> = ({
   question,
   reviewMode = false,
 }) => {
-  const queryClient = useQueryClient();
+  const queryClient = useQueryClient(); // React Query client instance
 
+  // Define a mutation to answer a question
   const answerQuestionMutation = useMutation({
+    // Mutation function to send data to the server
     mutationFn: ({ id, answer }: { id: string; answer: string }) => {
       return axios.post("http://localhost:3000/answerQuestion", { id, answer });
     },
@@ -31,6 +35,7 @@ const Question: React.FC<Omit<Note, "answer"> & { reviewMode: boolean }> = ({
     },
   });
 
+  // Form handling using react-hook-form library
   const {
     register,
     handleSubmit,
@@ -85,4 +90,5 @@ const Question: React.FC<Omit<Note, "answer"> & { reviewMode: boolean }> = ({
   );
 };
 
+// Export the Question component
 export { Question };

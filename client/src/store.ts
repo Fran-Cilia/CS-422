@@ -4,11 +4,13 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
 
+// Define the interface for the user store state
 export interface UserStoreState {
   userId: number;
   setUserId: (id: number) => void;
 }
 
+// Create and export the user store using Zustand
 export const useUserStore = create(
   persist(
     (set) => ({

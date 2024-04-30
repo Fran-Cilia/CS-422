@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { useUserStore } from "../store";
 import type { UserStoreState } from "../store";
 
+// Define the UserProfile component
 const UserProfile: React.FC<{ id: number; name: string; pfpPath: string }> = ({
   id,
   name,
@@ -30,4 +31,5 @@ const UserProfile: React.FC<{ id: number; name: string; pfpPath: string }> = ({
   );
 };
 
+// Export the UserProfile component
 export { UserProfile };

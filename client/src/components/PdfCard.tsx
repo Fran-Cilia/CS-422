@@ -3,12 +3,13 @@
 /// DESCRIPTION: PdfCard.tsx: Describes the cards shown on the Document Selection. 
 import { useNavigate } from "react-router-dom";
 
+// Define the PdfCard component
 const PdfCard: React.FC<{ id: string; name: string; author: string }> = ({
   id,
   name,
   author,
 }) => {
-  const nav = useNavigate();
+  const nav = useNavigate(); // Initialize the navigation hook
 
   return (
     <div className="border-[#e4e4e7] border-[1px] rounded-xl p-4 flex flex-col justify-between">
@@ -29,4 +30,5 @@ const PdfCard: React.FC<{ id: string; name: string; author: string }> = ({
   );
 };
 
+// Export the PdfCard component
 export { PdfCard };

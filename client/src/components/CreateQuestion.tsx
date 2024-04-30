@@ -5,9 +5,11 @@ import { useQueryClient, useMutation } from "@tanstack/react-query";
 import axios from "axios";
 import { useForm } from "react-hook-form";
 
+// Define the CreateQuestion component
 const CreateQuestion: React.FC<{ pdfId: string }> = ({ pdfId }) => {
   const queryClient = useQueryClient();
 
+  // Define a mutation to create a new question
   const createQuestionMutation = useMutation({
     mutationFn: ({
       pdfId,
@@ -32,6 +34,7 @@ const CreateQuestion: React.FC<{ pdfId: string }> = ({ pdfId }) => {
     },
   });
 
+  // Form handling using react-hook-form library
   const {
     register,
     handleSubmit,
@@ -88,4 +91,5 @@ const CreateQuestion: React.FC<{ pdfId: string }> = ({ pdfId }) => {
   );
 };
 
+// Export the CreateQuestion component
 export { CreateQuestion };

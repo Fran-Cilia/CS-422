@@ -1,6 +1,8 @@
 /// AUTHORS: NA, FC, VD, RK, AP
 /// LAST EDITED: 4-29-2024
 /// DESCRIPTION: Answer.tsx: Describes the "answer" component which contains all data related to a question answer object.
+
+// Define a type representing the structure of a note object
 type Note = {
   id: string;
   chapter: string;
@@ -9,6 +11,7 @@ type Note = {
   answer: string;
 };
 
+// React Functional Component representing the Answer component
 const Answer: React.FC<Omit<Note, "id" | "question">> = ({
   chapter,
   header,
@@ -31,4 +34,5 @@ const Answer: React.FC<Omit<Note, "id" | "question">> = ({
   );
 };
 
+// Export the Answer component
 export { Answer };
