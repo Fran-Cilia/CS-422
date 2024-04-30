@@ -22,6 +22,11 @@ const PDFs = [
     author: "James Sommerville",
     path: "som22.pdf",
   },
+  {
+    name: "ENGLISH FOR SCIENCEAND TECHNOLOGY",
+    author: "Huckin & Olsen",
+    path: "pg_par.pdf",
+  },
 ];
 
 (async () => {
