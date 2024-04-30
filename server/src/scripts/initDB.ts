@@ -1,3 +1,6 @@
+/// AUTHORS: NA, FC, VD, RK, AP
+/// LAST EDITED: 4-29-2024
+/// DESCRIPTION: initDB.ts: Script that runs to set up the default values in the database. Essentially, preloads data used for testing/demo.
 import { db, notes, pdfs, users } from "../db";
 
 const PDFs = [
