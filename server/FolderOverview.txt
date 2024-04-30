@@ -1,0 +1,18 @@
+FOLDER DESCRIPTION: The server folder holds all relevant code related to the storage and retrieval of user data in the service layer.
+This includes the Active Reading Server (ARS), Reading Data Repository (RDR), and Drizzle ORM. 
+
+Execution: The exeuction of this folder falls mainly on the index.ts file, which acts as the ARS and redirects queries
+to drizzle which then creates safe queries which are used to the access the RDR.
+
+FOLDER STRUCTURE:
+
+├─ server
+│  ├─ package.json (DEFINE DEPENDENCIES AND SCRIPTS FOR SQ3R SERVER)
+│  ├─ node_modules (STORE DEPENDENCIES AFTER INSTALLATION)
+│  │  └─ ... (SEQUENCE OF DEPENDENCY SOURCE CODE)
+│  └─ drizzle (COMPILED DATABASE DRIVER AFTER `npm run schema-push`)
+│  └─ migrations-folder (SQL MIGRATIONS)
+│  │  └─ ... (SEQUENCE OF MIGRATIONS)
+│  └─ drizzle (COMPILED DATABASE DRIVER AFTER `npm run schema-push`)
+│  └─ src (SOURCE CODE)
+│     └─ index.ts (MAIN SERVER FILE, HOLDS ALL API ROUTES)
