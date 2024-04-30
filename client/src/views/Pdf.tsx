@@ -7,6 +7,7 @@ import som5 from "../assets/som5.pdf";
 import som6 from "../assets/som6.pdf";
 import som7 from "../assets/som7.pdf";
 import som22 from "../assets/som22.pdf";
+import pg_par from "../assets/pg_par.pdf";
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import { useForm } from "react-hook-form";
@@ -96,6 +97,8 @@ const Pdf = () => {
               return som7;
             } else if (pdfData.path == "som22.pdf") {
               return som22;
+            } else if (pdfData.path == "pg_par.pdf") {
+              return pg_par;
             } else {
               return sommervillePdf;
             }
